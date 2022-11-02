@@ -10,8 +10,10 @@ export default function RootLayout({
       <head>
         <title>Nation</title>
       </head>
-      <body>
-        <main className=" bg-slate-600 min-h-screen">{children}</main>
+      <body className="bg-slate-600 min-h-screen">
+        <header></header>
+        <main className="">{children}</main>
+        <footer></footer>
       </body>
     </html>
   );

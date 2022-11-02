@@ -1,5 +1,13 @@
+"use client";
+import { useState, use } from "react";
+import useSWR from "swr";
+import SearchBar from "./components/searchbar";
+import Country from "./components/countries";
+// import { getCountries, ICountry } from "./lib/getCountries";
 import Image from "next/image";
-interface Country {
+import fetcher from "./lib/fetcher";
+
+export interface ICountry {
   name: {
     official: string;
   };
@@ -10,30 +18,31 @@ interface Country {
     png: string;
   };
 }
-async function getCountries(): Promise<Country[]> {
+export async function getCountries(): Promise<ICountry[]> {
   const res = await fetch("https://restcountries.com/v3.1/all");
-  const data = await res.json();
-  return data;
+  return res.json();
 }
 
-export default async function Home() {
-  const countries = await getCountries();
-  const country = countries[0];
+export default function Home() {
+  const [searchResults, setSearchResults] = useState("");
+  const { data } = useSWR(
+    "https://restcountries.com/v3.1/all?field=name,capital,region,population,flags",
+    fetcher<ICountry[]>
+  );
+  if (!data) {
+    return <div>loading</div>;
+  }
+
+  console.log(data);
+
   return (
-    <div>
-      <h1>{country.name.official}</h1>
-      {country.capital}
-      {country.region}
-      <div className="relative w-64 h-44">
-        <Image
-          className="object-cover w-full h-full"
-          fill
-          src={country.flags.png}
-          alt=""
-        />
+    <>
+      <SearchBar />
+      <div className="grid xl:grid-cols-4 xl:gap-14">
+        {data.map((country) => {
+          return <Country key={country.name.official} {...country} />;
+        })}
       </div>
-      <p>population</p>
-      {country.population}
-    </div>
+    </>
   );
 }
