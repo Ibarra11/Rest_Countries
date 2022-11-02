@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ICountry } from "../lib/getCountries";
+import Link from "next/link";
+import { ICountry } from "../types";
 export default function Country(props: ICountry) {
   return (
     <div>
@@ -11,6 +12,12 @@ export default function Country(props: ICountry) {
           className="object-cover"
         />
       </div>
+      <Link
+        className=" text-slate-100"
+        href={`/country/${props.name.official}`}
+      >
+        {props.name.common}
+      </Link>
     </div>
   );
 }

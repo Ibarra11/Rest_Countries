@@ -1,17 +1,13 @@
-import fetcher from "./fetcher";
-import useSWR from "swr";
-export interface ICountry {
-  name: {
-    official: string;
-  };
-  population: string;
-  region: string;
-  capital: [string];
-  flags: {
-    png: string;
-  };
-}
-export async function getCountries(): Promise<ICountry[]> {
-  const res = await fetch("https://restcountries.com/v3.1/all");
+import { ICountry } from "../types";
+
+export default async function getCountries(): Promise<ICountry[]> {
+  console.log("getCountries");
+  console.log(process.env.BASE_API);
+  const url = `${
+    process.env.BASE_API as string
+  }/all?name,capital,population,region,flags,border,tld,subregion,languages,curriences`;
+
+  const res = await fetch(url);
+
   return res.json();
 }
