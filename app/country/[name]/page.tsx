@@ -16,7 +16,7 @@ export default async function Page({
   params: { name: string };
 }) {
   console.log(name);
-  //   const country = await getCountryByName(name);
-  //   console.log(country.name.common);
+    const country = await getCountryByName(name);
+    console.log(country.name.common);
   return <div>{/* <h1>{country.name.common}</h1> */}</div>;
 }

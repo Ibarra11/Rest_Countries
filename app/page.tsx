@@ -8,7 +8,6 @@ import Country from "./components/country";
 import fetcher from "./lib/fetcher";
 
 import { ICountry } from "./types";
-import getCountryByName from "./lib/getCountryByName";
 
 export default function Home() {
   const [searchResults, setSearchResults] = useState("");
@@ -16,22 +15,10 @@ export default function Home() {
     "https://restcountries.com/v3.1/all",
     fetcher<ICountry[]>
   );
-  useEffect(() => {
-    async function getData() {
-      const res = await getCountryByName((data as any)[0].name.common);
-      console.log(res);
-    }
-    if (data) {
-      console.log(data[0]);
-      getData();
-    }
-  }, [data]);
 
   if (!data) {
     return <div>loading</div>;
   }
-
-  // console.log(country);
 
   return (
     <>
