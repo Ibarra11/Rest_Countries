@@ -4,7 +4,7 @@ import { ICountry } from "../types";
 export default function Country(props: ICountry) {
   return (
     <Link
-      href={`/country/${props.cca2}`}
+      href={`/country/${props.name.common}`}
       className="flex flex-col shadow-md rounded-lg overflow-hidden cursor-pointer"
       aria-label={props.name.common}
     >

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+
 import getCountries from "../../lib/getCountries";
 import getCountryByName from "../../lib/getCountryByName";
 
@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   const countries = await getCountries();
 
   return countries.map((country) => ({
-    name: country.cca2,
+    name: country.name.common,
   }));
 }
 
@@ -16,11 +16,8 @@ export default async function Page({
 }: {
   params: { name: string };
 }) {
-  console.log(name);
   const [country] = await getCountryByName(name);
-
   console.log(country);
-  console.log(country.name.common);
   return (
     <div className="relative flex items-center  gap-28 ">
       <div className="relative w-[560px] h-[400px]">
@@ -51,44 +48,45 @@ export default async function Page({
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Sub Region:</h2>
-            <span className="text-gray-400">{country.subregion}</span>
+            <span className="text-gray-400">
+              {country.subregion ? country.subregion : "N/A"}
+            </span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Capital:</h2>
-            <span className="text-gray-400">{country.capital}</span>
+            <span className="text-gray-400">
+              {country.capital ? country.capital : "N/A"}
+            </span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Top Level Domain:</h2>
             <span className="text-gray-400">{country.tld}</span>
           </li>
           <li className="flex gap-2">
-            <h2 className="font-semibold text-sm">Currencies:</h2>
-            <ul>
-              {Object.values(country.currencies).map((currency) => {
-                return (
-                  <li className="text-gray-400" key={currency.name}>
-                    {currency.name}
-                  </li>
-                );
-              })}
-            </ul>
+            <h2 className="font-semibold">Currencies:</h2>
+            {country.currencies ? (
+              <ul>
+                {Object.values(country.currencies).map((currency) => {
+                  return (
+                    <li className="text-gray-400" key={currency.name}>
+                      {currency.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <span className="text-gray-400">N/A</span>
+            )}
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Languages:</h2>
             <span className="text-gray-400">
-              {Object.values(country.languages)
-                .map((language) => language)
-                .join(",")}
+              {country.languages
+                ? Object.values(country.languages)
+                    .map((language) => language)
+                    .join(",")
+                : "N/A"}
             </span>
-            {/* <ul className="flex ">
-              {Object.values(country.languages).map((language) => {
-                return (
-                  <li className="text-gray-400" key={language}>
-                    {language}
-                  </li>
-                );
-              })}
-            </ul> */}
           </li>
         </ul>
         <div className="relative flex items-baseline gap-4 mt-auto">
@@ -102,12 +100,12 @@ export default async function Page({
                     className=" bg-gray-2 px-6 py-1 text-gray-400"
                     key={border}
                   >
-                    <Link href="#">{border}</Link>
+                    {border}
                   </li>
                 );
               })
             ) : (
-              <li className=" bg-gray-2 px-6 py-1 text-gray-400">None</li>
+              <li className=" bg-gray-2 px-6 py-1 text-gray-400">N/A</li>
             )}
           </ul>
         </div>
