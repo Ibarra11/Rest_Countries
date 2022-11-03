@@ -89,10 +89,12 @@ export default async function Page({
             </span>
           </li>
         </ul>
-        <div className="relative flex items-baseline gap-4 mt-auto">
-          <h2 className=" font-semibold">Border Countries:</h2>
+        <div className="relative flex items-baseline gap-4 mt-auto ">
+          <h2 className=" font-semibold whitespace-nowrap">
+            Border Countries:
+          </h2>
 
-          <ul className="flex gap-3">
+          <ul className="flex flex-wrap gap-3">
             {country.borders ? (
               country.borders.map((border) => {
                 return (

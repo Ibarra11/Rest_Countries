@@ -7,7 +7,9 @@ export default function RootLayout({
 }) {
   return (
     <section className="dark:text-white">
-      <Link href="/">Back</Link>
+      <Link className="mb-20 block" href="/">
+        Back
+      </Link>
       {children}
     </section>
   );
