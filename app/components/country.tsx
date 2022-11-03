@@ -3,7 +3,11 @@ import Link from "next/link";
 import { ICountry } from "../types";
 export default function Country(props: ICountry) {
   return (
-    <div className="flex flex-col shadow-md rounded-lg">
+    <Link
+      href={`/country/${props.name.common}`}
+      className="flex flex-col shadow-md rounded-lg overflow-hidden cursor-pointer"
+      aria-label={props.name.common}
+    >
       <div className="relative w-full h-44">
         <Image
           src={props.flags.png}
@@ -29,6 +33,6 @@ export default function Country(props: ICountry) {
           </li>
         </ul>
       </div>
-    </div>
+    </Link>
   );
 }
