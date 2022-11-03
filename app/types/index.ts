@@ -3,16 +3,16 @@ export interface ICountry {
     official: string;
     common: string;
   };
-
+  cca2: string;
   population: string;
   region: string;
   capital: [string];
   flags: {
     png: string;
   };
-  border: string[];
+  borders?: string[];
   tld: [string];
   subregion: string;
   languages: Record<string, string>;
-  curriences: Record<string, Record<"name", string>>;
+  currencies: Record<string, Record<"name", string>>;
 }
