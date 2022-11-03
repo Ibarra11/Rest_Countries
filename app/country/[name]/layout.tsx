@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 export default function RootLayout({
   children,
 }: {
@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <section className="dark:text-white">
-      <button className="mb-20">Back</button>
+      <Link href="/">Back</Link>
       {children}
     </section>
   );
