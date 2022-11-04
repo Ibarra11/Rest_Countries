@@ -5,7 +5,7 @@ export default function Country(props: ICountry) {
   return (
     <Link
       href={`/country/${props.name.common}`}
-      className="flex flex-col shadow-md rounded-lg overflow-hidden cursor-pointer"
+      className="flex flex-col shadow-md rounded-lg overflow-hidden cursor-pointer hover:scale-110 duration-150 hover:duration-300 "
       aria-label={props.name.common}
     >
       <div className="relative w-full h-44">
