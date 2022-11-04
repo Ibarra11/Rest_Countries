@@ -17,7 +17,7 @@ export default async function Page({
   params: { name: string };
 }) {
   const [country] = await getCountryByName(name);
-  console.log(country);
+
   return (
     <div className="relative flex items-center  gap-28 ">
       <div className="relative w-[560px] h-[400px]">
