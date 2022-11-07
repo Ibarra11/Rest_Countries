@@ -20,13 +20,13 @@ export default function Home() {
       } else {
         getCountriesByRegion(region).then(setCountries);
       }
+      setSearchValue("");
     }
   }, [region]);
   return (
     <>
       <div className="isolate relative flex mb-12 justify-between">
         <RegionInput searchValue={searchValue} onValueChange={setSearchValue} />
-
         <RegionSelect
           currentRegion={region}
           onRegionChange={(region) => setRegion(region)}
