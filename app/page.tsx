@@ -9,7 +9,7 @@ import RegionInput from "./components/RegionInput";
 import { ICountry, Regions } from "./types";
 
 export default function Home() {
-  const [searchResults, setSearchResults] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [region, setRegion] = useState<undefined | Regions>(undefined);
   const [countries, setCountries] = useState<ICountry[]>([]);
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <div className="isolate relative flex mb-12 justify-between">
-        <RegionInput />
+        <RegionInput searchValue={searchValue} onValueChange={setSearchValue} />
 
         <RegionSelect
           currentRegion={region}
@@ -34,7 +34,7 @@ export default function Home() {
         />
       </div>
       <Suspense fallback={<SkeletonGrid />}>
-        <CountryGrid selectedCountries={countries} />
+        <CountryGrid searchValue={searchValue} selectedCountries={countries} />
       </Suspense>
     </>
   );

@@ -1,27 +1,40 @@
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import useSWR from "swr";
 import fetcher from "../lib/fetcher";
+
 import Country from "./Country";
+
 import { ICountry } from "../types";
+
 interface Props {
   selectedCountries: ICountry[];
+  searchValue: string;
 }
+
 const loadFactor = 12;
 
-export default function CountryGrid({ selectedCountries }: Props) {
+export default function CountryGrid({ selectedCountries, searchValue }: Props) {
   const [currentLoadFactor, setCurrentLoadFactor] = useState(1);
   const { data } = useSWR(
     "https://restcountries.com/v3.1/all",
     fetcher<ICountry[]>,
     { suspense: true }
   );
-  const countryData =
+  let countryData =
     selectedCountries.length > 0 ? selectedCountries : (data as ICountry[]);
+  if (searchValue !== "") {
+    countryData = countryData.filter((country) => {
+      return country.name.common
+        .toLowerCase()
+        .startsWith(searchValue.toLowerCase());
+    });
+  }
 
   const countriesToDisplay = countryData.slice(
     0,
     loadFactor * currentLoadFactor
   );
+
   return (
     <>
       <div className="grid xl:grid-cols-4 xl:gap-14">
