@@ -1,13 +1,20 @@
+"use client";
 import { useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown, Check } from "lucide-react";
 
-export default function CustomSelect() {
-  const [currentValue, setCurrentValue] = useState("");
+import { Regions } from "../types";
+
+interface Props {
+  currentRegion: Regions | undefined;
+  onRegionChange: (region: Regions) => void;
+}
+export default function RegionSelect({ currentRegion, onRegionChange }: Props) {
   return (
     <Select.Root
-      onValueChange={setCurrentValue}
-      value={currentValue === "" ? undefined : currentValue}
+      defaultValue="Filter by region"
+      onValueChange={onRegionChange}
+      value={currentRegion}
     >
       <Select.Trigger className="bg-white shadow-md text-gray-700 dark:bg-gray-2 dark:shadow-none dark:text-gray-300 text-sm">
         <button className="flex justify-between items-center w-52 py-4 px-6">

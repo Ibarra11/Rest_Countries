@@ -3,15 +3,22 @@ import useSWR from "swr";
 import fetcher from "../lib/fetcher";
 import Country from "./Country";
 import { ICountry } from "../types";
+interface Props {
+  selectedCountries: ICountry[];
+}
 const loadFactor = 12;
-export default function CountryGrid() {
+
+export default function CountryGrid({ selectedCountries }: Props) {
   const [currentLoadFactor, setCurrentLoadFactor] = useState(1);
   const { data } = useSWR(
     "https://restcountries.com/v3.1/all",
     fetcher<ICountry[]>,
     { suspense: true }
   );
-  const countryData = data as ICountry[];
+  console.log("selected: ", selectedCountries);
+  const countryData =
+    selectedCountries.length > 0 ? selectedCountries : (data as ICountry[]);
+
   const countriesToDisplay = countryData.slice(
     0,
     loadFactor * currentLoadFactor

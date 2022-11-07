@@ -1,18 +1,33 @@
 "use client";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense, use } from "react";
+import { getCountriesByRegion } from "./lib/getCountriesByRegion";
 import CountryGrid from "./components/CountryGrid";
 import SkeletonGrid from "./components/SkeletonGrid";
+import RegionSelect from "./components/RegionSelect";
+import RegionInput from "./components/RegionInput";
 
-import Filter from "./components/Filter";
+import { ICountry, Regions } from "./types";
 
 export default function Home() {
   const [searchResults, setSearchResults] = useState("");
-
+  const [region, setRegion] = useState<undefined | Regions>(undefined);
+  const [countries, setCountries] = useState<ICountry[]>([]);
+  useEffect(() => {
+    if (region) {
+      getCountriesByRegion(region).then(setCountries);
+    }
+  }, [region]);
   return (
     <>
-      <Filter />
+      <div className="isolate relative flex mb-12 justify-between">
+        <RegionInput />
+        <RegionSelect
+          currentRegion={region}
+          onRegionChange={(region) => setRegion(region)}
+        />
+      </div>
       <Suspense fallback={<SkeletonGrid />}>
-        <CountryGrid />
+        <CountryGrid selectedCountries={countries} />
       </Suspense>
     </>
   );
