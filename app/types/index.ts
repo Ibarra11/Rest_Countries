@@ -17,4 +17,10 @@ export interface ICountry {
   currencies?: Record<string, Record<"name", string>>;
 }
 
-export type Regions = "Africa" | "America" | "Asia" | "Europe" | "Oceania";
+export type Regions =
+  | "Africa"
+  | "America"
+  | "Asia"
+  | "Europe"
+  | "Oceania"
+  | "All";

@@ -11,11 +11,7 @@ interface Props {
 }
 export default function RegionSelect({ currentRegion, onRegionChange }: Props) {
   return (
-    <Select.Root
-      defaultValue="Filter by region"
-      onValueChange={onRegionChange}
-      value={currentRegion}
-    >
+    <Select.Root onValueChange={onRegionChange} value={currentRegion}>
       <Select.Trigger className="bg-white shadow-md text-gray-700 dark:bg-gray-2 dark:shadow-none dark:text-gray-300 text-sm">
         <button className="flex justify-between items-center w-52 py-4 px-6">
           <Select.Value placeholder="Filter by region" />
@@ -28,7 +24,7 @@ export default function RegionSelect({ currentRegion, onRegionChange }: Props) {
         <Select.Content>
           <Select.Viewport className="bg-white shadow-lg dark:bg-gray-2 dark:shadow-none rounded-md ">
             <Select.Group>
-              {["Africa", "America", "Asia", "Europe", "Oceania"].map(
+              {["Africa", "America", "Asia", "Europe", "Oceania", "All"].map(
                 (val, i) => (
                   <Select.Item
                     key={`${val}-${i}`}

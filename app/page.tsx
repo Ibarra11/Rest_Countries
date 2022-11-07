@@ -14,16 +14,23 @@ export default function Home() {
   const [countries, setCountries] = useState<ICountry[]>([]);
   useEffect(() => {
     if (region) {
-      getCountriesByRegion(region).then(setCountries);
+      if (region === "All") {
+        setCountries([]);
+        setRegion(undefined);
+      } else {
+        getCountriesByRegion(region).then(setCountries);
+      }
     }
   }, [region]);
   return (
     <>
       <div className="isolate relative flex mb-12 justify-between">
         <RegionInput />
+
         <RegionSelect
           currentRegion={region}
           onRegionChange={(region) => setRegion(region)}
+          key={region === "All" ? "reset" : "region"}
         />
       </div>
       <Suspense fallback={<SkeletonGrid />}>

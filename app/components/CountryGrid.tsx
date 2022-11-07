@@ -15,7 +15,6 @@ export default function CountryGrid({ selectedCountries }: Props) {
     fetcher<ICountry[]>,
     { suspense: true }
   );
-  console.log("selected: ", selectedCountries);
   const countryData =
     selectedCountries.length > 0 ? selectedCountries : (data as ICountry[]);
 
