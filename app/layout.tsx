@@ -10,7 +10,7 @@ export default function RootLayout({
       <head>
         <title>Where In The World?</title>
       </head>
-      <body className=" bg-white dark:bg-gray-3 min-h-screen">
+      <body className=" bg-gray-100 dark:bg-gray-3 min-h-screen">
         <Header />
         <main className="max-w-7xl mx-auto">{children}</main>
       </body>

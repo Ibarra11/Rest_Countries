@@ -2,7 +2,8 @@
 import { useState, Suspense } from "react";
 import CountryGrid from "./components/CountryGrid";
 import SkeletonGrid from "./components/SkeletonGrid";
-import Filter from "./components/filter";
+
+import Filter from "./components/Filter";
 
 export default function Home() {
   const [searchResults, setSearchResults] = useState("");

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 export default function RootLayout({
   children,
 }: {
@@ -7,7 +8,10 @@ export default function RootLayout({
 }) {
   return (
     <section className="dark:text-white">
-      <Link className="mb-20 block" href="/">
+      <Link className="flex items-center gap-2 mb-20 " href="/">
+        <span>
+          <ArrowLeft size={20} />
+        </span>
         Back
       </Link>
       {children}
