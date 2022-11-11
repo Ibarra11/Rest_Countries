@@ -7,8 +7,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="dark:text-white">
-      <Link className="flex items-center gap-2 mb-20 " href="/">
+    <section className="text-gray-700 dark:text-gray-300 mt-12">
+      <Link
+        aria-label="go back"
+        className="flex items-center gap-2 mb-20 "
+        href="/"
+      >
         <span>
           <ArrowLeft size={20} />
         </span>

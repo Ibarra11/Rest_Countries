@@ -19,8 +19,8 @@ export default async function Page({
   const [country] = await getCountryByName(name);
 
   return (
-    <div className="relative flex items-center  gap-28 ">
-      <div className="relative w-[560px] h-[400px]">
+    <div className="relative flex flex-col   gap-11 md:flex-row   md:items-center lg:gap-20 xl:gap-28 ">
+      <div className="relative w-full h-[260px]  md:w-[560px] md:h-[400px] ">
         <Image
           src={country.flags.png}
           alt={`the flag of ${country.name.common}`}
@@ -28,59 +28,51 @@ export default async function Page({
           className="object-cover"
         />
       </div>
-      <div className=" h-80 flex flex-col gap-6 flex-1  ">
+      <div className="flex flex-col gap-6 flex-1   ">
         <h1 className="text-[32px] font-extrabold mb-6 ">
           {country.name.common}
         </h1>
 
-        <ul className="flex flex-col flex-wrap gap-2 h-40 w-full content-between text-base">
+        <ul className="flex  flex-col text-base  gap-2 xl:h-40   content-between   xl:flex-wrap">
           <li className="flex gap-2">
             <h2 className=" font-semibold">Official Name:</h2>
-            <span className="text-gray-400">{country.name.official}</span>
+            <span>{country.name.official}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Population:</h2>
-            <span className="text-gray-400">{country.population}</span>
+            <span>{country.population}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Region:</h2>
-            <span className="text-gray-400">{country.region}</span>
+            <span>{country.region}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Sub Region:</h2>
-            <span className="text-gray-400">
-              {country.subregion ? country.subregion : "N/A"}
-            </span>
+            <span>{country.subregion ? country.subregion : "N/A"}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Capital:</h2>
-            <span className="text-gray-400">
-              {country.capital ? country.capital : "N/A"}
-            </span>
+            <span>{country.capital ? country.capital : "N/A"}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Top Level Domain:</h2>
-            <span className="text-gray-400">{country.tld}</span>
+            <span>{country.tld}</span>
           </li>
           <li className="flex gap-2">
             <h2 className="font-semibold">Currencies:</h2>
             {country.currencies ? (
               <ul>
                 {Object.values(country.currencies).map((currency) => {
-                  return (
-                    <li className="text-gray-400" key={currency.name}>
-                      {currency.name}
-                    </li>
-                  );
+                  return <li key={currency.name}>{currency.name}</li>;
                 })}
               </ul>
             ) : (
-              <span className="text-gray-400">N/A</span>
+              <span>N/A</span>
             )}
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Languages:</h2>
-            <span className="text-gray-400">
+            <span>
               {country.languages
                 ? Object.values(country.languages)
                     .map((language) => language)
@@ -99,7 +91,7 @@ export default async function Page({
               country.borders.map((border) => {
                 return (
                   <li
-                    className=" bg-gray-2 px-6 py-1 text-gray-400"
+                    className="bg-gray-300 text-gray-700 dark:bg-gray-2 dark:text-gray-300 px-6 py-1"
                     key={border}
                   >
                     {border}
@@ -107,7 +99,9 @@ export default async function Page({
                 );
               })
             ) : (
-              <li className=" bg-gray-2 px-6 py-1 text-gray-400">N/A</li>
+              <li className=" bg-gray-300 text-gray-700 dark:bg-gray-2 dark:text-gray-300 px-6 py-1">
+                N/A
+              </li>
             )}
           </ul>
         </div>

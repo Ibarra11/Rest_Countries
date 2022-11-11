@@ -25,7 +25,7 @@ export default function Home() {
   }, [region]);
   return (
     <>
-      <div className="isolate relative flex mb-12 justify-between">
+      <div className="relative  flex flex-col gap-12   md:flex-row md:gap-0  my-12 justify-between">
         <RegionInput searchValue={searchValue} onValueChange={setSearchValue} />
         <RegionSelect
           currentRegion={region}

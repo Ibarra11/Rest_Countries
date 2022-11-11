@@ -37,16 +37,16 @@ export default function CountryGrid({ selectedCountries, searchValue }: Props) {
 
   return (
     <>
-      <div className="grid xl:grid-cols-4 xl:gap-14">
+      <div className="grid grid-cols-1 gap-9  md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4 xl:gap-14">
         {countriesToDisplay.map((country) => {
           return <Country key={country.name.official} {...country} />;
         })}
       </div>
-      <div className="h-12 flex items-center justify-center  mt-12 mb-8">
+      <div className="h-12 flex items-center justify-center  mt-12">
         {countriesToDisplay.length < countryData.length && (
           <button
             onClick={() => setCurrentLoadFactor(currentLoadFactor + 1)}
-            className=" bg-gray-2 py-2 px-4 text-gray-400 duration-200 hover:bg-slate-900"
+            className=" bg-gray-50 shadow-md text-gray-700 hover:bg-slate-700 hover:text-gray-100  py-2 px-4   dark:bg-gray-2  dark:text-gray-300 duration-200 dark:hover:bg-slate-900 dark:focus:bg-slate-900"
           >
             Load More
           </button>

@@ -10,7 +10,7 @@ export default function RegionInput({ searchValue, onValueChange }: Props) {
   return (
     <div className="relative flex gap-8 items-center">
       <input
-        className="relative bg-white text-gray-700 shadow-md   w-[480px] pl-14 h-full bg-transparent cursor-pointer py-4 dark:bg-gray-2 dark:text-gray-300 dark:shadow-none"
+        className="relative bg-gray-200 text-gray-700   w-[480px] pl-14 h-full  cursor-pointer py-4 dark:bg-gray-2 dark:text-gray-300 dark:shadow-none"
         placeholder="search for a country..."
         type="text"
         value={searchValue}

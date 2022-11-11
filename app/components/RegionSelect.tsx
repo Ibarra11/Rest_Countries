@@ -11,7 +11,7 @@ interface Props {
 export default function RegionSelect({ currentRegion, onRegionChange }: Props) {
   return (
     <Select.Root onValueChange={onRegionChange} value={currentRegion}>
-      <Select.Trigger className="bg-white shadow-md flex justify-between items-center w-52 py-4 px-6 text-gray-700 dark:bg-gray-2 dark:shadow-none dark:text-gray-300 text-sm">
+      <Select.Trigger className="bg-gray-200  flex justify-between items-center w-52 py-4 px-6 text-gray-700 dark:bg-gray-2 dark:shadow-none dark:text-gray-300 text-sm">
         <Select.Value placeholder="Filter by region" />
         <Select.Icon>
           <ChevronDown size={16} />
