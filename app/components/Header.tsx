@@ -8,31 +8,12 @@ export default function Header() {
   );
 
   useEffect(() => {
-    if (localStorage.getItem("darkMode")) {
-      const mode = localStorage.getItem("color-mode");
-      if (mode === "dark") {
-        setColorMode("dark");
-        document.documentElement.classList.add("dark");
-      } else {
-        setColorMode("light");
-        document.documentElement.classList.remove("dark");
-      }
-    } else if (window.matchMedia) {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        localStorage.setItem("color-mode", "dark");
-        setColorMode("dark");
-        document.documentElement.classList.add("dark");
-      } else {
-        localStorage.setItem("color-mode", "light");
-        setColorMode("light");
-
-        document.documentElement.classList.add("light");
-      }
+    if (document.documentElement.classList.contains("dark")) {
+      setColorMode("dark");
+      localStorage.setItem("color-mode", "dark");
     } else {
-      localStorage.setItem("darkMode", "light");
       setColorMode("light");
-
-      document.documentElement.classList.add("light");
+      localStorage.setItem("color-mode", "light");
     }
   }, []);
 
