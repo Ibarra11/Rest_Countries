@@ -20,7 +20,7 @@ export default async function Page({
 
   return (
     <div className="relative flex flex-col   gap-11 md:flex-row   md:items-center lg:gap-20 xl:gap-28 ">
-      <div className="relative w-full h-[260px]  md:w-[560px] md:h-[400px] ">
+      <div className="relative w-full h-[340px]  md:w-[560px] md:h-[400px] ">
         <Image
           src={country.flags.png}
           alt={`the flag of ${country.name.common}`}
@@ -40,7 +40,7 @@ export default async function Page({
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Population:</h2>
-            <span>{country.population}</span>
+            <span>{country.population.toLocaleString()}</span>
           </li>
           <li className="flex gap-2">
             <h2 className=" font-semibold">Region:</h2>

@@ -37,7 +37,7 @@ export default function CountryGrid({ selectedCountries, searchValue }: Props) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-9  md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4 xl:gap-14">
+      <div className="grid grid-cols-1 gap-9  md:grid-cols-2  lg:grid-cols-3  xl:grid-cols-4 xl:gap-12">
         {countriesToDisplay.map((country) => {
           return <Country key={country.name.official} {...country} />;
         })}
