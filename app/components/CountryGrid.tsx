@@ -1,7 +1,8 @@
+"use client";
 import { useState } from "react";
 import useSWR from "swr";
 import fetcher from "../lib/fetcher";
-
+import SkeletonGrid from "./SkeletonGrid";
 import Country from "./Country";
 
 import { ICountry } from "../types";
@@ -20,6 +21,7 @@ export default function CountryGrid({ selectedCountries, searchValue }: Props) {
     fetcher<ICountry[]>,
     { suspense: true }
   );
+
   let countryData =
     selectedCountries.length > 0 ? selectedCountries : (data as ICountry[]);
   if (searchValue !== "") {
