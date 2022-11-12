@@ -1,6 +1,6 @@
 export default function SkeletonGrid() {
   return (
-    <div className="grid xl:grid-cols-4 xl:gap-14">
+    <div className="grid grid-cols-1 gap-9  md:grid-cols-2  lg:grid-cols-3   xl:grid-cols-4 xl:gap-12">
       {new Array(12).fill(null).map((_, i) => {
         return <SkeletonItem key={i} />;
       })}
