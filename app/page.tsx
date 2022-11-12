@@ -33,9 +33,8 @@ export default function Home() {
           key={region === "All" ? "reset" : "region"}
         />
       </div>
-      <Suspense fallback={<SkeletonGrid />}>
-        <CountryGrid searchValue={searchValue} selectedCountries={countries} />
-      </Suspense>
+
+      <CountryGrid searchValue={searchValue} selectedCountries={countries} />
     </>
   );
 }

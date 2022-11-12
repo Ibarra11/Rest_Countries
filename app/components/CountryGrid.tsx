@@ -18,9 +18,11 @@ export default function CountryGrid({ selectedCountries, searchValue }: Props) {
   const [currentLoadFactor, setCurrentLoadFactor] = useState(1);
   const { data } = useSWR(
     "https://restcountries.com/v3.1/all",
-    fetcher<ICountry[]>,
-    { suspense: true }
+    fetcher<ICountry[]>
   );
+  if (!data) {
+    return <SkeletonGrid />;
+  }
 
   let countryData =
     selectedCountries.length > 0 ? selectedCountries : (data as ICountry[]);
