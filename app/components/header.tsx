@@ -57,7 +57,13 @@ export default function Header() {
       </Link>
       {colorMode && (
         <div className="flex items-center gap-2 ml-auto ">
-          <button className="p-2" onClick={() => toggleDarkMode()}>
+          <button
+            aria-label={`${
+              colorMode === "dark" ? "turn light mode on" : "turn dark mode on"
+            }`}
+            className="p-2"
+            onClick={() => toggleDarkMode()}
+          >
             <Moon size={16} />
           </button>
           <p className="text-base font-semibold">Dark Mode</p>
