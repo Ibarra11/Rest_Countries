@@ -47,7 +47,9 @@ export default function Header() {
           >
             <Moon size={16} />
           </button>
-          <p className="text-base font-semibold">Dark Mode</p>
+          <p className="text-base font-semibold">
+            {colorMode === "dark" ? "Light" : "Dark"} Mode
+          </p>
         </div>
       )}
     </header>
