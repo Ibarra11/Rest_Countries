@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import getCountries from "../../lib/getCountries";
 import getCountryByName from "../../lib/getCountryByName";
+import { verifyAuth } from "../../actions/auth";
+import { redirect } from "next/navigation";
 
 export async function generateStaticParams() {
   const countries = await getCountries();
@@ -16,6 +18,10 @@ export default async function Page({
 }: {
   params: { name: string };
 }) {
+  const { isAuthenticated } = await verifyAuth();
+  if (!isAuthenticated) {
+    return redirect("/auth/login");
+  }
   const [country] = await getCountryByName(name);
 
   return (

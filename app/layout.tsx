@@ -1,6 +1,5 @@
 import "./globals.css";
-import Header from "./components/Header";
-import Script from "next/script";
+
 export default function RootLayout({
   children,
 }: {
@@ -14,7 +13,7 @@ export default function RootLayout({
 
       <body className=" bg-gray-50 dark:bg-gray-3 min-h-screen">
         <MagicScriptTag />
-        <Header />
+
         <main className="max-w-7xl mx-auto px-9 pb-8">{children}</main>
       </body>
     </html>
