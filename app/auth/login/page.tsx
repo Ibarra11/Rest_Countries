@@ -75,7 +75,7 @@ export default function LoginForm() {
         </CardFooter>
         <div className="px-6 pb-4 text-center">
           <Link className=" text-sm text-slate-500" href="/auth/signup">
-            Don't have an account sign up?
+            Don&#39;t have an account sign up?
           </Link>
         </div>
       </Card>
