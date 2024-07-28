@@ -2,6 +2,7 @@
 import { Moon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { logout } from "../actions/auth";
 export default function Header() {
   const [colorMode, setColorMode] = useState<"dark" | "light" | undefined>(
     undefined
@@ -32,7 +33,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex items-center h-20 px-9 bg-gray-100 text-gray-700 shadow-sm dark:bg-gray-2 dark:text-gray-300 dark:shadow-none  xl:px-20">
+    <header className="flex items-center h-20 px-9 bg-gray-100 text-gray-700 shadow-sm dark:bg-gray-2 dark:text-gray-300 dark:shadow-none w-full  xl:px-20">
       <Link href="/">
         <h1 className=" text-2xl font-extrabold">Where in the world?</h1>
       </Link>
@@ -52,6 +53,12 @@ export default function Header() {
           </p>
         </div>
       )}
+      <button
+        onClick={() => logout()}
+        className="bg-gray-700 text-gray-100 py-2 px-6 ml-8 rounded"
+      >
+        Logout
+      </button>
     </header>
   );
 }

@@ -20,8 +20,8 @@ export default function LoginForm() {
   const router = useRouter();
   useEffect(() => {
     async function checkAuth() {
-      const { isAuthenticated } = await verifyAuth();
-      if (isAuthenticated) {
+      const { success } = await verifyAuth();
+      if (success) {
         router.push("/");
       }
     }

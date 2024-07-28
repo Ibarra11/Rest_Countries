@@ -1,10 +1,14 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export async function signup(
-  formData: FormData
-): Promise<{ success: true } | { success: false; message: string }> {
+type Success = { success: true; user: { id: string; email: string } };
+type Error = { success: false; message: string };
+
+type AuthResponse = Success | Error;
+
+export async function signup(formData: FormData): Promise<AuthResponse> {
   const email = formData.get("email");
   const password = formData.get("password");
   const phoneNumber = formData.get("phoneNumber");
@@ -21,21 +25,21 @@ export async function signup(
 
   if (req.ok) {
     const { data } = await req.json();
+
     cookies().set({
       name: "countries_refresh_token",
       value: data.refreshToken,
       httpOnly: true,
       path: "/",
     });
-    return { success: true };
+    return { success: true, user: data.user };
   }
   const badResponse = await req.json();
+  console.log(badResponse);
   return { success: false, message: badResponse.message };
 }
 
-export async function login(
-  formData: FormData
-): Promise<{ success: true } | { success: false; message: string }> {
+export async function login(formData: FormData): Promise<AuthResponse> {
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -50,22 +54,28 @@ export async function login(
 
   if (req.ok) {
     const { data } = await req.json();
+    console.log(data);
     cookies().set({
       name: "countries_refresh_token",
       value: data.refreshToken,
       httpOnly: true,
       path: "/",
     });
-    return { success: true };
+    return { success: true, user: data.user };
   }
   const badResponse = await req.json();
   return { success: false, message: badResponse.message };
 }
 
-export async function verifyAuth() {
+export async function logout() {
+  cookies().delete("countries_refresh_token");
+  return redirect(`/auth/login`);
+}
+
+export async function verifyAuth(): Promise<AuthResponse> {
   const refreshToken = cookies().get("countries_refresh_token");
   if (!refreshToken) {
-    return { isAuthenticated: false };
+    return { success: false, message: "refresh_token is missing" };
   }
   const req = await fetch(`${process.env.BVT_AUTH_URL}/auth/self`, {
     headers: {
@@ -75,8 +85,10 @@ export async function verifyAuth() {
   });
 
   if (req.ok) {
-    return { isAuthenticated: true };
+    const { data } = await req.json();
+    return { success: true, user: data.user };
   }
+  const badResponse = await req.json();
   cookies().delete("countries_refresh_token");
-  return { isAuthenticated: false };
+  return { success: false, message: badResponse.message };
 }

@@ -18,8 +18,8 @@ export default async function Page({
 }: {
   params: { name: string };
 }) {
-  const { isAuthenticated } = await verifyAuth();
-  if (!isAuthenticated) {
+  const { success } = await verifyAuth();
+  if (!success) {
     return redirect("/auth/login");
   }
   const [country] = await getCountryByName(name);

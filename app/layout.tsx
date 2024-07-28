@@ -13,8 +13,7 @@ export default function RootLayout({
 
       <body className=" bg-gray-50 dark:bg-gray-3 min-h-screen">
         <MagicScriptTag />
-
-        <main className="max-w-7xl mx-auto px-9 pb-8">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

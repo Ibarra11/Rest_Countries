@@ -18,9 +18,8 @@ export default function Home() {
 
   useEffect(() => {
     async function checkAuth() {
-      const { isAuthenticated } = await verifyAuth();
-      console.log(isAuthenticated);
-      if (!isAuthenticated) {
+      const { success } = await verifyAuth();
+      if (!success) {
         return router.push("/auth/login");
       }
     }
@@ -41,16 +40,21 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <div className="relative  flex flex-col gap-12   md:flex-row md:gap-0  my-12 justify-between">
-        <RegionInput searchValue={searchValue} onValueChange={setSearchValue} />
-        <RegionSelect
-          currentRegion={region}
-          onRegionChange={(region) => setRegion(region)}
-          key={region === "All" ? "reset" : "region"}
-        />
-      </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto relative  flex flex-col gap-12   md:flex-row md:gap-0  my-12 justify-between">
+          <RegionInput
+            searchValue={searchValue}
+            onValueChange={setSearchValue}
+          />
+          <RegionSelect
+            currentRegion={region}
+            onRegionChange={(region) => setRegion(region)}
+            key={region === "All" ? "reset" : "region"}
+          />
+        </div>
 
-      <CountryGrid searchValue={searchValue} selectedCountries={countries} />
+        <CountryGrid searchValue={searchValue} selectedCountries={countries} />
+      </div>
     </div>
   );
 }

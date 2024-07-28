@@ -24,8 +24,8 @@ export default function SignupForm() {
 
   useEffect(() => {
     async function checkAuth() {
-      const { isAuthenticated } = await verifyAuth();
-      if (isAuthenticated) {
+      const { success } = await verifyAuth();
+      if (success) {
         router.push("/");
       }
     }
@@ -39,7 +39,7 @@ export default function SignupForm() {
       router.push("/");
     } else {
       toast({
-        title: "Login Failed",
+        title: "Signup Failed",
         description: result.message,
       });
     }
